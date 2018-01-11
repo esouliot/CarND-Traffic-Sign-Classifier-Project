@@ -113,11 +113,13 @@ To train the model, I used the provided code from the [LeNet lab](https://github
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 My final model results were:
+
 * training set accuracy of 99.5%
 * validation set accuracy of 93.2% 
 * test set accuracy of 91.1%
 
 If an iterative approach was chosen:
+
 * What was the first architecture that was tried and why was it chosen?
 
 The LeNet architecture was used throughout, with the only change to the layers of the network being in the padding type of the max pooling layers (2x2 valid padding to 2x2 same padding)
@@ -150,7 +152,7 @@ In hindsight, perhaps even 0.001 is too high for later epochs, because as can be
 
 * Use of convolutions
 
-As in the number classification problem of the [MNIST](https://www.tensorflow.org/get_started/mnist/pros) dataset, convolutions are of use in classifying traffic signs, because for a given grayscaled image, a neural network can work its way up from pixel gradients to lines, to shapes, to combinations of shapes, and then having tags given to said combinations.
+As in the numeral classification problem of the [MNIST](https://www.tensorflow.org/get_started/mnist/pros) dataset, convolutions are of use in classifying traffic signs, because for a given grayscaled image, a neural network can work its way up from pixel gradients to lines, to shapes, to combinations of shapes, and then giving tags to said combinations.
 
 * Use of max pooling
 
@@ -162,6 +164,7 @@ While the model slightly overfitted the training data (final training accuracy o
 
 
 If a well known architecture was chosen:
+
 * What architecture was chosen?
 
 A slightly modified version of LeNet was used
@@ -180,7 +183,25 @@ That, and Yann LeCun used convolutional networks to [classify traffic signs with
 
 Here are seven German traffic signs that I found on the web:
 
-![alt text][image4] ![alt text][image5] ![alt text][image6] ![alt text][image7] ![alt text][image8] ![alt text][image9] ![alt text][image10]
+![alt text][image4] 
+
+Nothing difficult about this sign. Taken from a high-resolution image, photographed on a clear, sunny day.
+
+![alt text][image5]
+
+Because of the grassy background to this image, the grayscaled normalized version exhibits some nose around the sign
+
+![alt text][image6]
+
+Looking back in this image, it seems that it may not actually be a German speed limit sign, because the numeric font used is not 
+
+![alt text][image7] 
+
+![alt text][image8] 
+
+![alt text][image9] 
+
+![alt text][image10]
 
 
 
