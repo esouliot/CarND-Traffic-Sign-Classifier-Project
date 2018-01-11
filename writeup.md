@@ -120,35 +120,35 @@ My final model results were:
 
 If an iterative approach was chosen:
 
-* What was the first architecture that was tried and why was it chosen?
+- What was the first architecture that was tried and why was it chosen?
 
-The LeNet architecture was used throughout, with the only change to the layers of the network being in the padding type of the max pooling layers (2x2 valid padding to 2x2 same padding)
+* The LeNet architecture was used throughout, with the only change to the layers of the network being in the padding type of the max pooling layers (2x2 valid padding to 2x2 same padding)
 
-* What were some problems with the initial architecture?
+- What were some problems with the initial architecture?
 
-Not problems with the architecture, per se, but problems to do with tuning and data preprocessing (i.e., hyperparameter tuning, image grayscaling and normalizing)
+* Not problems with the architecture, per se, but problems to do with tuning and data preprocessing (i.e., hyperparameter tuning, image grayscaling and normalizing)
 
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
+- How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
 
-The unchanged LeNet architecture with 10 training epochs on the raw images gave a validation accuracy around 89%, as noted in the pre-project documentation. While that level of accuracy is not to the criterion of the project, it still means that it can correctly predict approximately 89 of 100 images fed to it in the validation step. To meet the passing validation accuracy of >= 93%, I took to preprocessing the images, as mentioned in previous sections, and to changing the epochs, learning rate, and batch size hyperparameters until the model gave a high enough validation accuracy.
+* The unchanged LeNet architecture with 10 training epochs on the raw images gave a validation accuracy around 89%, as noted in the pre-project documentation. While that level of accuracy is not to the criterion of the project, it still means that it can correctly predict approximately 89 of 100 images fed to it in the validation step. To meet the passing validation accuracy of >= 93%, I took to preprocessing the images, as mentioned in previous sections, and to changing the epochs, learning rate, and batch size hyperparameters until the model gave a high enough validation accuracy.
 
-* Which parameters were tuned? How were they adjusted and why?
+- Which parameters were tuned? How were they adjusted and why?
 
-Epochs: Changed from 10 to 20
+* Epochs: Changed from 10 to 20
 
 A simple explanation as to why I trained longer - more training epochs gives the loss optimizer more chances to "gradient-descend" and change the weights to give the lowest cross-entropy
 
-Batch size: Changed from 128 to 64
+* Batch size: Changed from 128 to 64
 
 This parameter was tuned by trial and error, and a smaller batch gave better results than larger batches. But, the improvement may be related to the number of epochs used, since a smaller batch size means that more batches were run, and with more batches come more iterations of the loss optimizer.
 
-Learning rate: Stayed the same at 0.001
+* Learning rate: Stayed the same at 0.001
 
 I tested a learning rate of 0.01, which gave some training epochs of >=93% validation accuracy, but it also tended to "over-step" and go in the wrong gradient direction, oftentimes resulting in decreasing validation accuracy for later epochs. 
 
 In hindsight, perhaps even 0.001 is too high for later epochs, because as can be seen in my project Jupyter notebook, the validation accuracy of my model fluctuates around 0.93 in the final 5-or-so epochs, sometimes dropping from higher values in the step from the 19th to the 20th epoch.This issue could  possibly be remediated using a learning-rate decay, or a simple iterative learning rate decrease.
 
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
+- What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
 
 * Use of convolutions
 
@@ -163,18 +163,20 @@ Because I made the choice to grayscale the images, I believe that max pooling wo
 While the model slightly overfitted the training data (final training accuracy of 0.995, final validation accuracy of 0.932), it was not overfit enough to justify the use of a dropout in the fully connected layers. 
 
 
-If a well known architecture was chosen:
+- If a well known architecture was chosen:
 
 * What architecture was chosen?
 
 A slightly modified version of LeNet was used
 
-* Why did you believe it would be relevant to the traffic sign application?
-The imagery of traffic signs are not unlike drawn numerals (in fact, speed limit signs include numerals), and since LeNet gave a 99% test accuracy on the MNIST dataset of drawn numerals, it isn't unreasonable to think LeNet would work well in classifying traffic signs. 
+- Why did you believe it would be relevant to the traffic sign application?
+
+* The imagery of traffic signs are not unlike drawn numerals (in fact, speed limit signs include numerals), and since LeNet gave a 99% test accuracy on the MNIST dataset of drawn numerals, it isn't unreasonable to think LeNet would work well in classifying traffic signs. 
 
 That, and Yann LeCun used convolutional networks to [classify traffic signs with 99.17% accuracy](yann.lecun.com/exdb/publis/pdf/sermanet-ijcnn-11.pdf)
 
 * How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
+ 
  A 91.1% test accuracy on completely untrained images is fairly accurate, with minimal changes to the network architecture.
 
 ### Test a Model on New Images
@@ -193,17 +195,23 @@ Because of the grassy background to this image, the grayscaled normalized versio
 
 ![alt text][image6]
 
-Looking back in this image, it seems that it may not actually be a German speed limit sign, because the numeric font used is not 
+Looking back on this image, it seems that it may not actually be a German speed limit sign, because the numeric font used is not like the fonts found in the speed limit signs provided in the dataset
 
 ![alt text][image7] 
 
+Like the first speed limit image, the original is clear, well-lit, against a blue backdrop with almost no noise
+
 ![alt text][image8] 
 
-![alt text][image9] 
+This yield sign was photographed from underneath, but it shouldn't pose much of an issue, since the model will likely train on images from many angles
+
+![alt text][image9]
+
+This image seems to have been taken from a distance, so there is the slight issue of poor resolution. But with that said, the sign is clearly recognizable to the naked eye, and being a "do not enter" sign, it has very distinct features
 
 ![alt text][image10]
 
-
+From the same image as the "do not enter" sign, so the issue of resolution is in this as well. And another major issue is of my own micategorization. Upon further search, this image may not be a "bicycles crossing" sign, but instead a sign to demarcate a bike lane on the road. So, in the classification task, this sign may be a loss.
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
@@ -211,33 +219,99 @@ Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+| Speed limit, 100km/h      		| Speed limit, 100km/h   									| 
+| Ahead only     			| Children crossing 										|
+| Speed limit, 70 km/h					| Speed limit, 30 km/h											|
+| Yield	      		| Yield					 				|
+| Do not enter			| Do not enter      							|
+| "Bicycles crossing" | Beware of ice/snow |
 
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+The model was able to correctly guess 4 of the 7 traffic signs, which gives an accuracy of 57.1%. 
+
+But, with two images being poorly selected on my part (70km/h, Bicycle lane) and not being trained on, the accuracy on the verifiable German traffic signs was 4/5, or 80%
+
+Of course, this raises the issue of generalization and being able to classify similar, but differently drawn signs. 
+
+In the case of the speed limit sign, the network was able to identify that it was a speed limit sign (and 4 of the 5 top softmax probabilities were given to speed limit signs), but it could not distinguish the numbers properly to give the proper speed limit. 
+
+In the case of the bicycle sign, the model was not able to pick-out the bicycle from the rest of the sign's features. Though, in the softmax probabilities, "bicycles crossing" was part of the top 5, even with a low softmax probability (discussed in further detail below)
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
-
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
+Sign 1.) Speed limit, 100km/h
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
+| .9888         			| Speed limit, 100 km/h   									| 
+| .0108     				| Speed limit, 80 km/h 										|
+| .0004					| Vehicles over 3.5 metric tons prohibited											|
+| <.0001   			| No passing for vehicles over 3.5 metric tons					 				|
+| <.0001				    | Roundabout mandatory      							|
 
+Sign 2.) Ahead only
 
-For the second image ... 
+| Probability | Prediction |
+|:-----------:|:----------:|
+| 0.9996 | Children crossing |
+| 0.0026 | Bicycles crossing |
+| 0.0003 | Keep right |
+| 0.0002 | Ahead only |
+| 0.0002 | Speed limit, 60km/h |
+
+Sign 3.) Speed limit, 70km/h
+
+| Probability | Prediction |
+|:-----------:|:----------:|
+| 0.6681 | Speed limit, 30km/h |
+| 0.3266 | Speed limit, 20km/h |
+| 0.0027 | Speed limit, 60km/h |
+| 0.0024 | Turn right ahead |
+| 0.0001 | Speed limit, 80km/h |
+
+Sign 4.) Priority road
+
+| Probability | Prediction |
+|:-----------:|:----------:|
+| 1.0000 | Priority road |
+| 0.0000 | Speed limit, 100km/h |
+| 0.0000 | No passing |
+| 0.0000 | No entry |
+| 0.0000 | Speed limit, 120km/h |
+
+Sign 5.) Yield
+
+| Probability | Prediction |
+|:-----------:|:----------:|
+| 1.0000 | Yield |
+| 0.0000 | Speed limit, 80km/h |
+| 0.0000 | Speed limit, 50km/h |
+| 0.0000 | Speed limit, 60km/h |
+| 0.0000 | Ahead only |
+
+Sign 6.) Do not enter
+
+| Probability | Prediction |
+|:-----------:|:----------:|
+| 1.0000 | Do not enter |
+| 0.0000 | No passing |
+| 0.0000 | Beware of ice/snow |
+| 0.0000 | Keep right |
+| 0.0000 | End of no passing |
+
+Sign 7.) "Bicycles crossing" (A mis-labeled sign on my part)
+
+| Probability | Prediction |
+|:-----------:|:----------:|
+| 0.5711 | Beware of ice/snow |
+| 0.1968 | Slippery road |
+| 0.1883 | Wild animals crossing |
+| 0.0413 | Bicycles crossing |
+| 0.0011 | Road work |
+
 
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
 #### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
 
+To be continued... Will have to modify the LeNet function in the project notebook to be able to return the weight tensors and activations
 
