@@ -2,8 +2,6 @@
 
 ## Writeup
 
----
-
 **Build a Traffic Sign Recognition Project**
 
 The goals / steps of this project are the following:
@@ -34,13 +32,11 @@ The goals / steps of this project are the following:
 ---
 ### Writeup / README
 
-#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
+#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.
 
 You're reading it! and here is a link to my [project code](https://github.com/esouliot/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
 
 ### Data Set Summary & Exploration
-
-#### 1. Provide a basic summary of the data set. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
 
 I used the numpy ndarray.shape method, and Python's built-in set() method to calculate summary statistics of the traffic
 signs data set:
@@ -51,8 +47,6 @@ signs data set:
 * The shape of a traffic sign image is (32, 32, 3)
 * The number of unique classes/labels in the data set is 43
 
-#### 2. Include an exploratory visualization of the dataset.
-
 Here is a sample image from the training set, representative of the types of images to be fed into the LeNet implementation
 
 ![Sample Image][image1]
@@ -61,8 +55,6 @@ This bar graph shows the frequency of a given image tag type, some tags appear f
 ![Bar Graph of Frequencies][image2]
 
 ### Design and Test a Model Architecture
-
-#### 1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
 
 1.) First, I converted the images to grayscale [Luma](https://en.wikipedia.org/wiki/Luma_(video)) using matrix multiplication. 
 
@@ -73,8 +65,6 @@ This bar graph shows the frequency of a given image tag type, some tags appear f
 
 ![PreProcessing Steps][image3]
 
-
-#### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
 I was able to find success with most of the original steps from the LeNet architecture. My final model consisted of the following layers:
 
@@ -97,9 +87,6 @@ I was able to find success with most of the original steps from the LeNet archit
 | Return logits | |
  
 
-
-#### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
-
 To train the model, I used the provided code from the [LeNet lab](https://github.com/esouliot/CarND-LeNet-Lab/blob/master/LeNet-Lab.ipynb)
 
 * Loss function: [Softmax cross entropy with logits](https://www.tensorflow.org/api_docs/python/tf/nn/softmax_cross_entropy_with_logits)
@@ -107,8 +94,6 @@ To train the model, I used the provided code from the [LeNet lab](https://github
 * Batch Size: 64
 * Number of training epochs: 20
 * Learning rate: 0.001
-
-#### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 My final model results were:
 
@@ -179,8 +164,6 @@ That, and Yann LeCun used convolutional networks to [classify traffic signs with
 
 ### Test a Model on New Images
 
-#### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
-
 Here are seven German traffic signs that I found on the web:
 
 ![alt text][image4] 
@@ -211,8 +194,6 @@ This image seems to have been taken from a distance, so there is the slight issu
 
 From the same image as the "do not enter" sign, so the issue of resolution is in this as well. And another major issue is of my own micategorization. Upon further search, this image may not be a "bicycles crossing" sign, but instead a sign to demarcate a bike lane on the road. So, in the classification task, this sign may be a loss.
 
-#### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
-
 Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
@@ -235,8 +216,6 @@ Of course, this raises the issue of generalization and being able to classify si
 * In the case of the speed limit sign, the network was able to identify that it was a speed limit sign (and 4 of the 5 top softmax probabilities were given to speed limit signs), but it could not distinguish the numbers properly to give the proper speed limit. 
 
 * In the case of the bicycle sign, the model was not able to pick-out the bicycle from the rest of the sign's features. Though, in the softmax probabilities, "bicycles crossing" was part of the top 5, even with a low softmax probability (discussed in further detail below)
-
-#### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
 Sign 1.) Speed limit, 100km/h
 
